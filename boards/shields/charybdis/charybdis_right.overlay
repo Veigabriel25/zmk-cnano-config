@@ -27,6 +27,11 @@
 &spi0 {
     status = "okay";
 };
+&trackball {
+	invert-x;
+	invert-y;
+};
+
 &trackball_split { 
 	device = <&trackball>; 
 	};

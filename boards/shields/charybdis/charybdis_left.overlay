@@ -24,6 +24,10 @@
 &spi0 {
     status = "okay";
 };
+&trackball2 {
+	swap-xy;
+};
+
 &trackball_split2 {
 	device = <&trackball2>;
 };
