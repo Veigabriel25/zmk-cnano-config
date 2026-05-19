@@ -13,8 +13,10 @@
 #define DEF 0
 #define LWR 1
 #define RSE 2
-#define ADJ 3
-#define MAC 6
+#define MAC 3
+#define MOUSE 4
+#define SCRL 5
+#define SNIPER 6
 
 &lt { quick_tap_ms = <220>; };
 
@@ -35,7 +37,7 @@
             bindings = <
 &kp TAB         &kp Q  &kp W  &kp E         &kp R  &kp T        &kp Y            &kp U  &kp I         &kp O    &kp P          &kp BACKSPACE
 &kp LEFT_SHIFT  &kp A  &kp S  &kp D         &kp F  &kp G        &kp H            &kp J  &kp K         &kp L    &kp SEMICOLON  &kp SINGLE_QUOTE
-&kp LCTRL       &kp Z  &kp X  &kp C         &kp V  &kp B        &kp N            &kp M  &kp COMMA     &kp DOT  &mo 3          &kp LEFT_GUI
+&kp LCTRL       &kp Z  &kp X  &kp C         &kp V  &kp B        &kp N            &kp M  &kp COMMA     &kp DOT  &mo MOUSE     &kp LEFT_GUI
                               &kp LEFT_ALT  &mo 1  &kp SPACE    &mt LSHFT ENTER  &mo 2  &kp LEFT_GUI
             >;
         };
@@ -72,12 +74,24 @@
             >;
         };
 
+        default_macos {
+            display-name = "Default (macOS)";
+            // GUI <-> ALT swapped vs default (Windows) for Command/Option positions on macOS
+
+            bindings = <
+&kp TAB         &kp Q  &kp W  &kp E         &kp R  &kp T        &kp Y            &kp U  &kp I         &kp O    &kp P          &kp BACKSPACE
+&kp LEFT_SHIFT  &kp A  &kp S  &kp D         &kp F  &kp G        &kp H            &kp J  &kp K         &kp L    &kp SEMICOLON  &kp SINGLE_QUOTE
+&kp LCTRL       &kp Z  &kp X  &kp C         &kp V  &kp B        &kp N            &kp M  &kp COMMA     &kp DOT  &mo MOUSE     &kp LEFT_ALT
+                              &kp LEFT_GUI  &mo 1  &kp SPACE    &mt LSHFT ENTER  &mo 2  &kp LEFT_ALT
+            >;
+        };
+
         mouse {
             display-name = "Mouse";
             bindings = <
-&studio_unlock  &trans  &trans  &trans  &trans  &trans    &trans  &trans    &trans    &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans    &mkp MB3  &mo 5   &trans  &trans 
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &mkp MB1  &mkp MB2  &mo 4   &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans    &trans    &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans    &mkp MB3  &mo SNIPER  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &mkp MB1  &mkp MB2  &mo SCRL   &trans  &trans
                         &trans  &trans  &trans    &trans  &trans    &trans
             >;
         };
@@ -99,23 +113,6 @@
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans    &trans    &trans    &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &mkp MB1  &mkp MB2  &mkp MB3  &trans  &trans
                         &trans  &trans  &trans    &trans  &trans    &trans
-            >;
-        };
-
-        default_macos {
-            display-name = "Default (macOS)";
-            // ------------------------------------------------------------------------------------------------
-            //| LALT/] |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | RALT/[ |
-            //| CTRL/` |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  | CTRL/' |
-            //| LGUI/\ |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | RGUI/- |
-            //                             | RSE | SPC | LWR |   | LWR | BKSP | RSE |
-            // GUI <-> ALT swapped vs default (Windows) for Command/Option positions on macOS
-
-            bindings = <
-&kp TAB         &kp Q  &kp W  &kp E         &kp R  &kp T        &kp Y            &kp U  &kp I         &kp O    &kp P          &kp BACKSPACE
-&kp LEFT_SHIFT  &kp A  &kp S  &kp D         &kp F  &kp G        &kp H            &kp J  &kp K         &kp L    &kp SEMICOLON  &kp SINGLE_QUOTE
-&kp LCTRL       &kp Z  &kp X  &kp C         &kp V  &kp B        &kp N            &kp M  &kp COMMA     &kp DOT  &mo 3          &kp LEFT_ALT
-                              &kp LEFT_GUI  &mo 1  &kp SPACE    &mt LSHFT ENTER  &mo 2  &kp LEFT_ALT
             >;
         };
 
