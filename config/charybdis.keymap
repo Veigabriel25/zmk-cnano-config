@@ -17,8 +17,6 @@
 #define MOUSE 4
 #define SCRL 5
 #define SNIPER 6
-#define SCRL_FAST 7
-#define SCRL_SLOW 8
 
 &lt { quick_tap_ms = <220>; };
 
@@ -100,11 +98,10 @@
 
         scroll {
             display-name = "Scroll";
-            // Hold J/K/L for fast / medium (default) / slow trackball scroll (right half home row)
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans        &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &mo SCRL_FAST  &trans  &mo SCRL_SLOW  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans        &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
                         &trans  &trans  &trans    &trans  &trans  &trans
             >;
         };
@@ -119,24 +116,12 @@
             >;
         };
 
-        scroll_fast {
+        extra1 {
             status = "reserved";
-            bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans    &trans  &trans  &trans
-            >;
         };
 
-        scroll_slow {
+        extra2 {
             status = "reserved";
-            bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans    &trans  &trans  &trans
-            >;
         };
     };
 };
