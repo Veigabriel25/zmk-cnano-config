@@ -11,12 +11,14 @@
 #include <dt-bindings/zmk/pointing.h>
 
 #define DEF 0
-#define LWR 1
-#define RSE 2
-#define MAC 3
+#define MAC 1
+#define LWR 2
+#define RSE 3
 #define MOUSE 4
 #define SCRL 5
 #define SNIPER 6
+#define SCRL_FAST 7
+#define SCRL_SLOW 8
 
 &lt { quick_tap_ms = <220>; };
 
@@ -38,7 +40,19 @@
 &kp TAB         &kp Q  &kp W  &kp E         &kp R  &kp T        &kp Y            &kp U  &kp I         &kp O    &kp P          &kp BACKSPACE
 &kp LEFT_SHIFT  &kp A  &kp S  &kp D         &kp F  &kp G        &kp H            &kp J  &kp K         &kp L    &kp SEMICOLON  &kp SINGLE_QUOTE
 &kp LCTRL       &kp Z  &kp X  &kp C         &kp V  &kp B        &kp N            &kp M  &kp COMMA     &kp DOT  &mo MOUSE     &kp LEFT_GUI
-                              &kp LEFT_ALT  &mo 1  &kp SPACE    &mt LSHFT ENTER  &mo 2  &kp LEFT_GUI
+                              &kp LEFT_ALT  &mo LWR  &kp SPACE    &mt LSHFT ENTER  &mo RSE  &kp LEFT_GUI
+            >;
+        };
+
+        default_macos {
+            display-name = "Default (macOS)";
+            // CTRL/ALT/GUI rotated: CTRL where ALT was, GUI where CTRL was, ALT where GUI was
+
+            bindings = <
+&kp TAB         &kp Q  &kp W  &kp E         &kp R  &kp T        &kp Y            &kp U  &kp I         &kp O    &kp P          &kp BACKSPACE
+&kp LEFT_SHIFT  &kp A  &kp S  &kp D         &kp F  &kp G        &kp H            &kp J  &kp K         &kp L    &kp SEMICOLON  &kp SINGLE_QUOTE
+&kp LEFT_GUI    &kp Z  &kp X  &kp C         &kp V  &kp B        &kp N            &kp M  &kp COMMA     &kp DOT  &mo MOUSE     &kp LCTRL
+                              &kp LEFT_ALT  &mo LWR  &kp SPACE    &mt LSHFT ENTER  &mo RSE  &kp LCTRL
             >;
         };
 
@@ -74,18 +88,6 @@
             >;
         };
 
-        default_macos {
-            display-name = "Default (macOS)";
-            // GUI <-> ALT swapped vs default (Windows) for Command/Option positions on macOS
-
-            bindings = <
-&kp TAB         &kp Q  &kp W  &kp E         &kp R  &kp T        &kp Y            &kp U  &kp I         &kp O    &kp P          &kp BACKSPACE
-&kp LEFT_SHIFT  &kp A  &kp S  &kp D         &kp F  &kp G        &kp H            &kp J  &kp K         &kp L    &kp SEMICOLON  &kp SINGLE_QUOTE
-&kp LCTRL       &kp Z  &kp X  &kp C         &kp V  &kp B        &kp N            &kp M  &kp COMMA     &kp DOT  &mo MOUSE     &kp LEFT_ALT
-                              &kp LEFT_GUI  &mo 1  &kp SPACE    &mt LSHFT ENTER  &mo 2  &kp LEFT_ALT
-            >;
-        };
-
         mouse {
             display-name = "Mouse";
             bindings = <
@@ -98,10 +100,11 @@
 
         scroll {
             display-name = "Scroll";
+            // Hold J/K/L for fast / medium (default) / slow trackball scroll (right half home row)
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans        &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &mo SCRL_FAST  &trans  &mo SCRL_SLOW  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans        &trans  &trans  &trans  &trans
                         &trans  &trans  &trans    &trans  &trans  &trans
             >;
         };
@@ -116,12 +119,24 @@
             >;
         };
 
-        extra1 {
+        scroll_fast {
             status = "reserved";
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+                        &trans  &trans  &trans    &trans  &trans  &trans
+            >;
         };
 
-        extra2 {
+        scroll_slow {
             status = "reserved";
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+                        &trans  &trans  &trans    &trans  &trans  &trans
+            >;
         };
     };
 };
