@@ -1,10 +1,8 @@
 #include "charybdis.dtsi"
-#include "charybdis_3610.dtsi"
-#include "split_input_common.dtsi"
 
 &kscan0 {
 	compatible = "zmk,kscan-gpio-matrix";
-	
+
 	col-gpios
 		= <&pro_micro 19 GPIO_ACTIVE_HIGH>
 		, <&pro_micro 18 GPIO_ACTIVE_HIGH>
@@ -20,17 +18,4 @@
 		, <&pro_micro 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
 		, <&pro_micro 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
 		;
-};
-&spi0 {
-    status = "okay";
-};
-&trackball2 {
-	swap-xy;
-};
-
-&trackball_split2 {
-	device = <&trackball2>;
-};
-&trackball_split { 
-	status = "disabled"; 
 };

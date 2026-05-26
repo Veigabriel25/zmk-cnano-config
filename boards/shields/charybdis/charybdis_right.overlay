@@ -36,10 +36,6 @@
 	device = <&trackball>;
 };
 
-&trackball_split2 {
-	status = "okay";
-};
-
-&trackball_listener2 {
+&trackball_listener {
 	status = "okay";
 };
