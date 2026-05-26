@@ -32,10 +32,12 @@
 	invert-y;
 };
 
+/* Trackball is on the central half: listener reads the sensor directly (not via input-split). */
 &trackball_split {
-	device = <&trackball>;
+	status = "disabled";
 };
 
 &trackball_listener {
 	status = "okay";
+	device = <&trackball>;
 };
