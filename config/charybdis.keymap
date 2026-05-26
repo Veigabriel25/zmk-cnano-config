@@ -7,6 +7,7 @@
 #include "keys_nb_osx.h"
 #include "keys_nb_win.h"
 #include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 
@@ -17,6 +18,7 @@
 #define MOUSE 4
 #define SCRL 5
 #define SNIPER 6
+#define BT 7
 
 &lt { quick_tap_ms = <220>; };
 
@@ -28,91 +30,129 @@
 
         default {
             display-name = "Default";
-            // ------------------------------------------------------------------------------------------------
-            //| LGUI/] |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | RGUI/[ | 
-            //| CTRL/` |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  | CTRL/' |
-            //| LALT/\ |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | RALT/- |
-            //                             | RSE | SPC | LWR |   | LWR | BKSP | RSE |
+            // ─────────────────────────────────────────────────────────────────────────────────────
+            // |  TAB  |  Q  |  W  |  E  |  R  |  T  |     |  Y  |  U  |  I  |  O  |  P  | BSPC |
+            // | LSFT  |  A  |  S  |  D  |  F  |  G  |     |  H  |  J  |  K  |  L  |  ;  |  '  |
+            // | LCTL  |  Z  |  X  |  C  |  V  |  B  |     |  N  |  M  |  ,  |  .  | MOU | LGUI |
+            //                        | LALT| LWR | SPC |     | S/E | RSE | LGUI |
 
             bindings = <
-&kp TAB         &kp Q  &kp W  &kp E         &kp R  &kp T        &kp Y            &kp U  &kp I         &kp O    &kp P          &kp BACKSPACE
-&kp LEFT_SHIFT  &kp A  &kp S  &kp D         &kp F  &kp G        &kp H            &kp J  &kp K         &kp L    &kp SEMICOLON  &kp SINGLE_QUOTE
-&kp LCTRL       &kp Z  &kp X  &kp C         &kp V  &kp B        &kp N            &kp M  &kp COMMA     &kp DOT  &mo MOUSE     &kp LEFT_GUI
-                              &kp LEFT_ALT  &mo LWR  &kp SPACE    &mt LSHFT ENTER  &mo RSE  &kp LEFT_GUI
+                &kp TAB         &kp Q  &kp W  &kp E         &kp R  &kp T        &kp Y            &kp U  &kp I         &kp O    &kp P          &kp BACKSPACE
+                &kp LEFT_SHIFT  &kp A  &kp S  &kp D         &kp F  &kp G        &kp H            &kp J  &kp K         &kp L    &kp SEMICOLON  &kp SINGLE_QUOTE
+                &kp LCTRL       &kp Z  &kp X  &kp C         &kp V  &kp B        &kp N            &kp M  &kp COMMA     &kp DOT  &mo MOUSE      &kp LEFT_GUI
+                                              &kp LEFT_ALT  &mo LWR  &kp SPACE    &mt LSHFT ENTER  &mo RSE  &kp LEFT_GUI
             >;
         };
 
         default_macos {
             display-name = "Default (macOS)";
-            // CTRL/ALT/GUI rotated: CTRL where ALT was, GUI where CTRL was, ALT where GUI was
+            // ─────────────────────────────────────────────────────────────────────────────────────
+            // |  TAB  |  Q  |  W  |  E  |  R  |  T  |     |  Y  |  U  |  I  |  O  |  P  | BSPC |
+            // | LSFT  |  A  |  S  |  D  |  F  |  G  |     |  H  |  J  |  K  |  L  |  ;  |  '  |
+            // | LGUI  |  Z  |  X  |  C  |  V  |  B  |     |  N  |  M  |  ,  |  .  | MOU | LCTL |
+            //                        | LALT| LWR | SPC |     | S/E | RSE | LCTL |
 
             bindings = <
-&kp TAB         &kp Q  &kp W  &kp E         &kp R  &kp T        &kp Y            &kp U  &kp I         &kp O    &kp P          &kp BACKSPACE
-&kp LEFT_SHIFT  &kp A  &kp S  &kp D         &kp F  &kp G        &kp H            &kp J  &kp K         &kp L    &kp SEMICOLON  &kp SINGLE_QUOTE
-&kp LEFT_GUI    &kp Z  &kp X  &kp C         &kp V  &kp B        &kp N            &kp M  &kp COMMA     &kp DOT  &mo MOUSE     &kp LCTRL
-                              &kp LEFT_ALT  &mo LWR  &kp SPACE    &mt LSHFT ENTER  &mo RSE  &kp LCTRL
+                &kp TAB         &kp Q  &kp W  &kp E         &kp R  &kp T        &kp Y            &kp U  &kp I         &kp O    &kp P          &kp BACKSPACE
+                &kp LEFT_SHIFT  &kp A  &kp S  &kp D         &kp F  &kp G        &kp H            &kp J  &kp K         &kp L    &kp SEMICOLON  &kp SINGLE_QUOTE
+                &kp LEFT_GUI    &kp Z  &kp X  &kp C         &kp V  &kp B        &kp N            &kp M  &kp COMMA     &kp DOT  &mo MOUSE      &kp LCTRL
+                                              &kp LEFT_ALT  &mo LWR  &kp SPACE    &mt LSHFT ENTER  &mo RSE  &kp LCTRL
             >;
         };
 
         number_symbols {
             display-name = "Numbers";
-            // -----------------------------------------------------------------------------------------
-            //|LGUI/CAPS |  *  |  7 |  8  |  9  |  +  |    |  !  |  @  |  #  |  $  |  %  | RGUI/F1 |
-            //|CTRL/MENU |  /  |  4 |  5  |  6  |  -  |    |  ^  |  &  |  *  |  (  |  )  | CTRL/F2 |
-            //|  LALT/=  |  0  |  1 |  4  |  3  |  .  |    |  ls |  F4 |  F5 |  F6 |  F7 | RALT/F3 |
-            //                      | ADJ | ___ | ___ |    | ___ | ___ | ADJ |
+            // ─────────────────────────────────────────────────────────────────────────────────────
+            // |  ESC  |  !  |  @  |  #  |  $  |  %  |     |  ^  |  &  |  *  |  +  |  -  | DEL  |
+            // |   `   |  1  |  2  |  3  |  4  |  5  |     |  (  |  {  |  [  |  =  |  _  |  ~   |
+            // |  ___  |  6  |  7  |  8  |  9  |  0  |     |  )  |  }  |  ]  |  |  |  /  |  \   |
+            //                        | ___ | ___ | ___ |     | ___ | ___ | ___ |
 
             bindings = <
-&kp ESC    &kp EXCLAMATION  &kp AT_SIGN   &kp HASH      &kp DOLLAR    &kp PERCENT     &kp CARET              &kp AMPERSAND    &kp ASTERISK       &kp PLUS   &kp MINUS             &kp DELETE
-&kp GRAVE  &kp NUMBER_1     &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4  &kp NUMBER_5    &kp LEFT_PARENTHESIS   &kp LEFT_BRACE   &kp LEFT_BRACKET   &kp EQUAL  &kp UNDERSCORE        &kp TILDE
-&trans     &kp NUMBER_6     &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp NUMBER_0    &kp RIGHT_PARENTHESIS  &kp RIGHT_BRACE  &kp RIGHT_BRACKET  &kp PIPE   &kp SLASH             &kp NON_US_BACKSLASH
-                                          &trans        &trans        &trans          &trans                 &trans           &trans
+                &kp ESC    &kp EXCLAMATION  &kp AT_SIGN   &kp HASH      &kp DOLLAR    &kp PERCENT     &kp CARET              &kp AMPERSAND    &kp ASTERISK       &kp PLUS   &kp MINUS             &kp DELETE
+                &kp GRAVE  &kp NUMBER_1     &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4  &kp NUMBER_5    &kp LEFT_PARENTHESIS   &kp LEFT_BRACE   &kp LEFT_BRACKET   &kp EQUAL  &kp UNDERSCORE        &kp TILDE
+                &trans     &kp NUMBER_6     &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp NUMBER_0    &kp RIGHT_PARENTHESIS  &kp RIGHT_BRACE  &kp RIGHT_BRACKET  &kp PIPE   &kp SLASH             &kp NON_US_BACKSLASH
+                                              &trans        &trans        &trans          &trans                 &trans           &trans
             >;
         };
 
         system {
             display-name = "System";
-            // -----------------------------------------------------------------------------------------
-            //| LGUI |  VOLU  |  PGUP  | WIN  | MAC  | ___  |            | ___  | HOME | PLAY| PGUP | VOLU | RGUI |
-            //| CTRL |  VOLD  |  LEFT  |  UP  | DOWN | RGHT |            | RGHT | DOWN | UP  | LEFT | VOLD | CTRL | 
-            //| LALT |  MUTE  |  PGDN  |  ___ | END  | ___  |            | ___  | END  | ___ | PGDN | MUTE | RALT |
-            //                          | ___ | ___  | ADJ  |            | ADJ  | ___  | ___ |
+            // ─────────────────────────────────────────────────────────────────────────────────────
+            // |  ___  | F11 | F12 | DEF | MAC | ___ |     | ___ | PGUP| UP  | PGDN| ___ | DEL  |
+            // |  ___  |  F1 |  F2 |  F3 |  F4 |  F5 |     | HOME| LEFT| DOWN| RGHT| END | BT   |
+            // |  ___  |  F6 |  F7 |  F8 |  F9 | F10 |     | VOL-| PREV| PLAY| NEXT| VOL+| MUTE |
+            //                        | ___ | ___ | ___ |     | ___ | ___ | ___ |
 
             bindings = <
-&trans  &kp F11  &kp F12  &to DEF  &to MAC  &trans     &trans             &kp PAGE_UP     &kp UP_ARROW      &kp PAGE_DOWN  &trans           &kp DELETE
-&trans  &kp F1   &kp F2   &kp F3  &kp F4  &kp F5     &kp HOME           &kp LEFT        &kp DOWN          &kp RIGHT      &kp END          &trans
-&trans  &kp F6   &kp F7   &kp F8  &kp F9  &kp F10    &kp C_VOLUME_DOWN  &kp C_PREVIOUS  &kp C_PLAY_PAUSE  &kp C_NEXT     &kp C_VOLUME_UP  &kp C_MUTE
-                          &trans  &trans  &trans     &trans             &trans          &trans
+                &trans  &kp F11  &kp F12  &to DEF  &to MAC  &trans     &trans             &kp PAGE_UP     &kp UP_ARROW      &kp PAGE_DOWN  &trans           &kp DELETE
+                &trans  &kp F1   &kp F2   &kp F3  &kp F4  &kp F5     &kp HOME           &kp LEFT        &kp DOWN          &kp RIGHT      &kp END          &mo BT
+                &trans  &kp F6   &kp F7   &kp F8  &kp F9  &kp F10    &kp C_VOLUME_DOWN  &kp C_PREVIOUS  &kp C_PLAY_PAUSE  &kp C_NEXT     &kp C_VOLUME_UP  &kp C_MUTE
+                                              &trans  &trans  &trans     &trans             &trans          &trans
             >;
         };
 
         mouse {
             display-name = "Mouse";
+            // ─────────────────────────────────────────────────────────────────────────────────────
+            // |  ___  | ___ | ___ | ___ | ___ | ___ |     | ___ | ___ | ___ | ___ | ___ | ___  |
+            // |  ___  | ___ | ___ | ___ | ___ | ___ |     | ___ | ___ | MB3 | SNP | ___ | ___  |
+            // |  ___  | ___ | ___ | ___ | ___ | ___ |     | ___ | MB1 | MB2 | SCR | ___ | ___  |
+            //                        | ___ | ___ | ___ |     | ___ | ___ | ___ |
+
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans    &trans    &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans    &mkp MB3  &mo SNIPER  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &mkp MB1  &mkp MB2  &mo SCRL   &trans  &trans
-                        &trans  &trans  &trans    &trans  &trans    &trans
+                &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans    &trans    &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans    &mkp MB3  &mo SNIPER  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans    &trans  &mkp MB1  &mkp MB2  &mo SCRL   &trans  &trans
+                                              &trans  &trans  &trans    &trans  &trans    &trans
             >;
         };
 
         scroll {
             display-name = "Scroll";
+            // ─────────────────────────────────────────────────────────────────────────────────────
+            // |  ___  | ___ | ___ | ___ | ___ | ___ |     | ___ | ___ | ___ | ___ | ___ | ___  |
+            // |  ___  | ___ | ___ | ___ | ___ | ___ |     | ___ | ___ | ___ | ___ | ___ | ___  |
+            // |  ___  | ___ | ___ | ___ | ___ | ___ |     | ___ | ___ | ___ | ___ | ___ | ___  |
+            //                        | ___ | ___ | ___ |     | ___ | ___ | ___ |
+
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans    &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+                                              &trans  &trans  &trans    &trans  &trans  &trans
             >;
         };
 
         sniper {
             display-name = "Sniper";
+            // ─────────────────────────────────────────────────────────────────────────────────────
+            // |  ___  | ___ | ___ | ___ | ___ | ___ |     | ___ | ___ | ___ | ___ | ___ | ___  |
+            // |  ___  | ___ | ___ | ___ | ___ | ___ |     | ___ | ___ | ___ | ___ | ___ | ___  |
+            // |  ___  | ___ | ___ | ___ | ___ | ___ |     | ___ | MB1 | MB2 | MB3 | ___ | ___  |
+            //                        | ___ | ___ | ___ |     | ___ | ___ | ___ |
+
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans    &trans    &trans    &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans    &trans    &trans    &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &mkp MB1  &mkp MB2  &mkp MB3  &trans  &trans
-                        &trans  &trans  &trans    &trans  &trans    &trans
+                &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans    &trans    &trans    &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans    &trans    &trans    &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans    &trans  &mkp MB1  &mkp MB2  &mkp MB3  &trans  &trans
+                                              &trans  &trans  &trans    &trans  &trans    &trans
+            >;
+        };
+
+        bluetooth {
+            display-name = "Bluetooth";
+            // ─────────────────────────────────────────────────────────────────────────────────────
+            // |  ___  | ___ | ___ | ___ | ___ | ___ |     | ___ | ___ | ___ | ___ | ___ | ___  |
+            // |  ___  | BT0 | BT1 | NXT | PRV | CLR |     | ___ | ___ | ___ | ___ | ___ | ___  |
+            // |  ___  | ___ | ___ | ___ | CLRA| ___ |     | ___ | ___ | ___ | ___ | ___ | ___  |
+            //                        | ___ | ___ | ___ |     | ___ | ___ | ___ |
+
+            bindings = <
+                &trans  &trans        &trans        &trans        &trans        &trans        &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_NXT    &bt BT_PRV    &bt BT_CLR    &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans        &trans        &trans        &bt BT_CLR_ALL &trans        &trans  &trans  &trans  &trans  &trans  &trans
+                                              &trans  &trans  &trans    &trans  &trans  &trans
             >;
         };
 

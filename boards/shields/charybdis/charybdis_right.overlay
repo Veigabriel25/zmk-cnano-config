@@ -32,9 +32,14 @@
 	invert-y;
 };
 
-&trackball_split { 
-	device = <&trackball>; 
-	};
-&trackball_split2 { 
-	status = "disabled"; 
+&trackball_split {
+	device = <&trackball>;
+};
+
+&trackball_split2 {
+	status = "okay";
+};
+
+&trackball_listener2 {
+	status = "okay";
 };
