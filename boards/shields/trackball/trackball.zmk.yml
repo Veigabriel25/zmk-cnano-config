@@ -1,0 +1,9 @@
+file_format: "1"
+id: trackball
+name: Trackball PMW3610
+type: shield
+url: https://github.com/Veigabriel25/zmk-cnano-config
+requires:
+  - pro_micro
+features:
+  - pointer
