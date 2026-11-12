@@ -1,14 +1,11 @@
 #include "charybdis.dtsi"
 #include "charybdis_3610.dtsi"
-#include "split_input_common.dtsi"
-
-&default_transform {
-	col-offset = <6>;
-};
+#include <dt-bindings/zmk/input_transform.h>
+#include <input/processors.dtsi>
 
 &kscan0 {
 	compatible = "zmk,kscan-gpio-matrix";
-	
+
 	col-gpios
 		= <&pro_micro 10 GPIO_ACTIVE_HIGH>
 		, <&pro_micro 16 GPIO_ACTIVE_HIGH>
@@ -24,17 +21,34 @@
 		, <&pro_micro 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
 		;
 };
+
 &spi0 {
-    status = "okay";
+	status = "okay";
 };
+
 &trackball {
 	invert-x;
 	invert-y;
 };
 
-&trackball_split { 
-	device = <&trackball>; 
+&trackball2 {
+	status = "disabled";
+};
+
+/ {
+	trackball_listener {
+		compatible = "zmk,input-listener";
+		device = <&trackball>;
+		input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT | INPUT_TRANSFORM_XY_SWAP)>;
+
+		scroll {
+			layers = <5>;
+			input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT | INPUT_TRANSFORM_XY_SWAP)>, <&zip_xy_scaler 1 9>, <&zip_xy_to_scroll_mapper>;
+		};
+
+		sniper {
+			layers = <6>;
+			input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT | INPUT_TRANSFORM_XY_SWAP)>, <&zip_xy_scaler 1 3>;
+		};
 	};
-&trackball_split2 { 
-	status = "disabled"; 
 };
